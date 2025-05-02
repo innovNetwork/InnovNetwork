@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: innovnetwork-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn payment_webhook:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: AFRICASTALKING_USERNAME
+        value: "Innov"
+      - key: AFRICASTALKING_API_KEY
+        value: "RBVpVouPq"
+      - key: CINETPAY_API_KEY
+        value: "14468589816812befc81e928.71500932"
+      - key: CINETPAY_SITE_ID
+        value: "105893723"
