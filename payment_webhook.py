@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
-from app.mikrotik import create_user
-from app.sms import send_sms
+from mikrotik import create_user
+from create_payment import create_payment
+from sms import send_sms
 import os
 
 app = FastAPI()
@@ -15,9 +16,14 @@ async def cinetpay_callback(request: Request):
         profile = payload.get("cpm_custom")
         phone = payload.get("phone_prefixe") + payload.get("cel_phone_num")
 
+         # 🔒 Essaye de créer l’utilisateur MikroTik, mais ne bloque pas si ça échoue
+    try:
         create_user(username, password, profile)
+    except Exception as e:
+        print(f"Erreur lors de la création d'utilisateur MikroTik : {e}")
 
-        message = f"Bienvenue sur InnoV'Network !\nLogin: {username}\nPassword: {password}"
-        send_sms(phone, message)
+    # ✅ Envoi du SMS même si MikroTik échoue
+    message = f"Bienvenue sur InnoV'Network !\nLogin: {username}\nPassword: {password}"
+    send_sms(phone, message)
 
     return {"status": "ok"}
