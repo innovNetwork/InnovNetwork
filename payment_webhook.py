@@ -6,6 +6,10 @@ import os
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "Bienvenue sur l'API InnoV'Network"}
+
 @app.post("/cinetpay-callback")
 async def cinetpay_callback(request: Request):
     payload = await request.json()
