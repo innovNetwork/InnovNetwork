@@ -31,8 +31,8 @@ def create_payment(amount, currency, return_url, cancel_url, email):
         "return_url": return_url,
         "cancel_url": cancel_url,
         "notify_url": "https://votre-domaine.com/cinetpay-callback",  # à modifier selon ton déploiement
-        "site_id": 105893723,
-        "apikey": 14468589816812befc81e928.71500932,
+        "site_id": "105893723",
+        "apikey": "14468589816812befc81e928.71500932",
         "lang": "fr",
         "channels": "ALL",
         "metadata": {
